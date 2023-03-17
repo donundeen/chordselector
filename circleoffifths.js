@@ -12,6 +12,8 @@ TODOs:
 - sending strings via osc
 - getting updates via osc
 
+- add minor ring, diminished ring
+- "set root" button
 */
 
 var supportsES6 = (function () {
