@@ -14,6 +14,7 @@ TODOs:
 
 - add minor ring, diminished ring
 - "set root" button
+- something else
 */
 
 var supportsES6 = (function () {
