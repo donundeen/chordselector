@@ -4,6 +4,11 @@ need a way to
 - sometimes not rotate, 
 - add additional areas in the whell that can be clicked.
 
+TODOs:
+- Make Scalable
+- Clickable areas
+- rotation
+- sub-areas within the clickable areas
 */
 
 var supportsES6 = (function () {
