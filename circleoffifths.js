@@ -9,6 +9,9 @@ TODOs:
 - Clickable areas
 - rotation
 - sub-areas within the clickable areas
+- sending strings via osc
+- getting updates via osc
+
 */
 
 var supportsES6 = (function () {
