@@ -15,6 +15,7 @@ TODOs:
 - Make Scalable - done
 - Clickable areas - done - also getting bound data for the area
 - rotation - animated
+  - https://stackoverflow.com/questions/13313043/d3-js-animate-rotation
 - sub-areas within the clickable areas
 - sending strings via osc
 - getting updates via osc
@@ -23,7 +24,7 @@ TODOs:
 - "set root" button
 - something else
 */
-
+// notes
 
 const width = 450,
   height = 450,
