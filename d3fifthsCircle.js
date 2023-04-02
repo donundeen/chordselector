@@ -13,10 +13,14 @@ need a way to
 
 TODOs:
 - Make Scalable - done
-- Clickable areas - done - also getting bound data for the area
+- Clickable areas - done - also getting bound data for the area 
+  - bubbled clicks on letters up to the full area
 - rotation - animated
   - https://stackoverflow.com/questions/13313043/d3-js-animate-rotation
+  - sorta working - progress made
+  - need to rotate letters so they stay upright.
 - sub-areas within the clickable areas
+  - need to make other pie charts around and within these charts
 - sending strings via osc
 - getting updates via osc
 
@@ -50,11 +54,10 @@ const svg = d3
 .attr("width", "90%")
 .attr("height", "90%")
 .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
-
 .attr('preserveAspectRatio', 'xMinYMid')
-  .attr("id", "mainsvg")
-  .append("g")
-  .attr("transform", `translate(${width / 2},${height / 2})`);
+.attr("id", "mainsvg")
+.append("g")
+.attr("transform", `translate(${width / 2},${height / 2})`);
 
 
 // Create dummy data
@@ -64,7 +67,6 @@ const data = { C: 30, Db: 30, D: 30, Eb: 30, E: 30, F: 30, Gb: 30, G: 30, Ab: 30
 const color = d3
   .scaleOrdinal()
   .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
-
 
 // Compute the position of each group on the pie:
 const pie = d3.pie().value((d) => d[1]);
@@ -86,12 +88,16 @@ svg
   .attr('d', arc)
   .attr('fill', d => { console.log(d); return color(d.data[0]) })
   .attr("data-note", d => d.data[0])
+  .attr("id", d=>d.data[0]+"_note")
   .attr("stroke", "black")
   .style("stroke-width", "2px")
   .style("opacity", 0.7)
   .on("click", function (element) {
+    console.log("clicked");
     let d3this = d3.select(this)
     let note = d3this.data()[0].data[0];  // this is weird, but gets us there...
+    console.log(d3this.data()[0].data);
+    svgrotate(30);
   })
 
 /*
@@ -100,10 +106,13 @@ pie.click(function(datum){
 })
 */
 
+
+// add the text and other stuff to each pie element
 data_ready.forEach(function (d, i) {
   console.log(d)
   console.log(i)
   let label = d.data[0]
+  let parentid = label+"_note";
   let coords = arc.centroid(d);
   console.log(coords);
   let x = coords[0] + 225;
@@ -113,7 +122,22 @@ data_ready.forEach(function (d, i) {
     .attr("x", x).attr("y", y)
     .attr("text-anchor", "middle").attr("alignment-baseline", "middle")
     //    .attr("transform", "rotate(" + rotation + ")")
-    .text(label);
+    .text(label) 
+    .on("click", function (element) {
+      console.log("lettter clicked");
+      console.log(d3.select("#"+parentid));
+      d3.select("#"+parentid).dispatch('click');    
+  //    console.log(d.data[0]);
+    //  console.log(d)
+     // console.log(i)
+ //     svgrotate(30);  
+  //    let d3this = d3.select(this)
+//      let note = d3this.data()[0].data[0];  // this is weird, but gets us there...
+    });
 })
 
+function svgrotate(angle){
+
+  d3.select("#mainsvg").attr("transform", "rotate("+angle+")");
+}
 
