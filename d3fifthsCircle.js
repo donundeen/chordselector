@@ -97,7 +97,7 @@ svg
     let d3this = d3.select(this)
     let note = d3this.data()[0].data[0];  // this is weird, but gets us there...
     console.log(d3this.data()[0].data);
-    svgrotate(30);
+    svgrotate(15);
   })
 
 /*
@@ -120,6 +120,7 @@ data_ready.forEach(function (d, i) {
   let rotation = d['startAngle'] / Math.PI / 2
   d3.select("#mainsvg").append("text")
     .attr("x", x).attr("y", y)
+    .attr("class","keepupright")
     .attr("text-anchor", "middle").attr("alignment-baseline", "middle")
     //    .attr("transform", "rotate(" + rotation + ")")
     .text(label) 
@@ -127,17 +128,14 @@ data_ready.forEach(function (d, i) {
       console.log("lettter clicked");
       console.log(d3.select("#"+parentid));
       d3.select("#"+parentid).dispatch('click');    
-  //    console.log(d.data[0]);
-    //  console.log(d)
-     // console.log(i)
- //     svgrotate(30);  
-  //    let d3this = d3.select(this)
-//      let note = d3this.data()[0].data[0];  // this is weird, but gets us there...
     });
 })
 
 function svgrotate(angle){
 
   d3.select("#mainsvg").attr("transform", "rotate("+angle+")");
+//  console.log(d3.select(".keepupright"));
+ // d3.selectAll(".keepupright").style("text-anchor", "center").attr("transform", "rotate(-"+angle+")");
+  d3.selectAll(".keepupright").rotate(-30);
 }
 
