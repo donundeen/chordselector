@@ -18,7 +18,8 @@ TODOs:
 - rotation - animated
   - https://stackoverflow.com/questions/13313043/d3-js-animate-rotation
   - sorta working - progress made
-  - need to rotate letters so they stay upright.
+  - instead, let's jsut change the letters in the slots. Much easier!!
+
 - sub-areas within the clickable areas
   - need to make other pie charts around and within these charts
 - sending strings via osc
@@ -34,6 +35,8 @@ const width = 450,
   height = 450,
   margin = 40;
 
+
+let currentRotation = 0;
 //var ringsize = 50;
 
 /*
@@ -56,13 +59,20 @@ const svg = d3
 .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
 .attr('preserveAspectRatio', 'xMinYMid')
 .attr("id", "mainsvg")
+.attr("transform","rotate(-15)")
 .append("g")
+.attr("id","slicesg")
 .attr("transform", `translate(${width / 2},${height / 2})`);
+
+d3.select("#mainsvg")
+  .append("g")
+  .attr("id", "textg");
 
 
 // Create dummy data
 //const data = { a: 9, b: 20, c: 30, d: 8, e: 12 };
-const data = { C: 30, Db: 30, D: 30, Eb: 30, E: 30, F: 30, Gb: 30, G: 30, Ab: 30, A: 30, Bb: 30, B: 30 };
+const data = { 1: 30, 2: 30, 3: 30, 4: 30, 5: 30, 6: 30, 7: 30, 8: 30, 9: 30, 10: 30, 11: 30, 12: 30 };
+const noteCircle = ["C","F","Bb","Eb", "Ab", "Db","Gb","B","E","A","D","G"];
 // set the color scale
 const color = d3
   .scaleOrdinal()
@@ -87,17 +97,18 @@ svg
   .join('path')
   .attr('d', arc)
   .attr('fill', d => { console.log(d); return color(d.data[0]) })
-  .attr("data-note", d => d.data[0])
-  .attr("id", d=>d.data[0]+"_note")
+//  .attr("data-note", d => d.data[0])
+  .attr("id", d=>"pos_"+d.data[0])
   .attr("stroke", "black")
   .style("stroke-width", "2px")
   .style("opacity", 0.7)
   .on("click", function (element) {
     console.log("clicked");
     let d3this = d3.select(this)
+    console.log(d3this.attr("data-note"));
     let note = d3this.data()[0].data[0];  // this is weird, but gets us there...
     console.log(d3this.data()[0].data);
-    svgrotate(15);
+    assignNotesToSlots(d3this.attr("data-note"));    
   })
 
 /*
@@ -112,17 +123,19 @@ data_ready.forEach(function (d, i) {
   console.log(d)
   console.log(i)
   let label = d.data[0]
-  let parentid = label+"_note";
+  let parentid = "pos_"+label;
   let coords = arc.centroid(d);
   console.log(coords);
-  let x = coords[0] + 225;
-  let y = coords[1] + 225;
+  let x = coords[0] + width/2;// 225;
+  let y = coords[1] + height/2 //225;
   let rotation = d['startAngle'] / Math.PI / 2
-  d3.select("#mainsvg").append("text")
+//  d3.select("#mainsvg").append("text")
+  d3.select("#textg").append("text")
     .attr("x", x).attr("y", y)
+    .attr("id", "text_"+label)
     .attr("class","keepupright")
     .attr("text-anchor", "middle").attr("alignment-baseline", "middle")
-    //    .attr("transform", "rotate(" + rotation + ")")
+    .attr("transform", "rotate(15, "+x+","+y+")")
     .text(label) 
     .on("click", function (element) {
       console.log("lettter clicked");
@@ -131,11 +144,24 @@ data_ready.forEach(function (d, i) {
     });
 })
 
-function svgrotate(angle){
+assignNotesToSlots("C");
 
-  d3.select("#mainsvg").attr("transform", "rotate("+angle+")");
-//  console.log(d3.select(".keepupright"));
- // d3.selectAll(".keepupright").style("text-anchor", "center").attr("transform", "rotate(-"+angle+")");
-  d3.selectAll(".keepupright").rotate(-30);
+
+function assignNotesToSlots(rootNote){
+  let noteindex = noteCircle.indexOf(rootNote);
+  let pos = 1;
+  while(pos <= 12){
+    let posid = "#text_"+pos;
+    let text = noteCircle[noteindex % 12];
+    d3.select(posid)
+    .text(text);
+    let parentid = "#pos_"+pos;
+    d3.select(parentid)
+    .attr("data-note", text);
+    noteindex++;
+    pos++;
+  }
 }
+
+
 
