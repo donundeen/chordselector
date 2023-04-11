@@ -16,7 +16,7 @@ let currentDimWheel = [...currentMajWheel].rotateRight(5);
 // [...circleOfFourths].reverse().rotateRight(-1);
 const majWheel = ['maj1', 'maj5', 'maj2', 'maj6', 'maj3', 'maj7', 'majb5', 'majb2', 'majb6', 'majb3', 'majb7', 'maj4'];
 const minWheel = ['min6', 'min3', 'min7', 'minb5', 'minb2', 'minb6', 'minb3', 'minb7', 'min4','min1', 'min5', 'min2'];
-const dimWheel = ['dimb7', 'dim4','dim1', 'dim5', 'dim2', 'dim6', 'dim3', 'dim7', 'dimb5', 'dimb2', 'dimb6', 'dimb3'];
+const dimWheel = ['dim7', 'dimb5', 'dimb2', 'dimb6', 'dimb3', 'dimb7', 'dim4','dim1', 'dim5', 'dim2', 'dim6', 'dim3'];
 
 console.log(currentMajWheel);
 console.log(currentMinWheel);
@@ -89,6 +89,7 @@ function setChord(root, value){
 function assignNotes(){
     console.log("assigning Notes");
     console.log(majWheel);
+    console.log(dimWheel);
     for (let i = 0; i<12; i++){
         let majId = majWheel[i];
         let minId = minWheel[i];
@@ -99,8 +100,6 @@ function assignNotes(){
         let majNote = currentMajWheel[i];
         let minNote = currentMinWheel[i];
         let dimNote = currentDimWheel[i];
-        console.log(majNote);
-        console.log(svgDoc.getElementById(majId).children[0]);
         // if there are extra child elements, as tehre sometimes are coming from AI, delete them
 
         while (svgDoc.getElementById(majId).childNodes.length > 1) {
@@ -111,9 +110,11 @@ function assignNotes(){
         while (svgDoc.getElementById(minId).childNodes.length > 1) {
             svgDoc.getElementById(minId).removeChild(svgDoc.getElementById(minId).lastChild);
         }
-
         svgDoc.getElementById(minId).children[0].textContent = minNote.toLowerCase();
-//        svgDoc.getElementById(dimId).children[0].textContent = dimNote;
+        while (svgDoc.getElementById(dimId).childNodes.length > 1) {
+            svgDoc.getElementById(dimId).removeChild(svgDoc.getElementById(dimId).lastChild);
+        }
+        svgDoc.getElementById(dimId).children[0].textContent = dimNote.toLowerCase()+"*";
     }
 }
 //Layer_1
