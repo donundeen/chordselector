@@ -54,11 +54,19 @@ function assignNotes(){
     console.log(majWheel);
     for (let i = 0; i<12; i++){
         let majId = majWheel[i];
+        let minId = minWheel[i];
+        let dimId = dimWheel[i];
         console.log(majId);
+        console.log(minId);
+        console.log(dimId);
         let majNote = currentMajWheel[i];
+        let minNote = currentMinWheel[i];
+        let dimNote = currentDimWheel[i];
         console.log(majNote);
         console.log(svgDoc.getElementById(majId).children[0]);
         svgDoc.getElementById(majId).children[0].textContent = majNote;
+        svgDoc.getElementById(minId).children[0].textContent = minNote;
+//        svgDoc.getElementById(dimId).children[0].textContent = dimNote;
     }
 }
 //Layer_1
