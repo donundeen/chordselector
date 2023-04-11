@@ -7,6 +7,7 @@ Array.prototype.rotateRight = function( n ) {
 
 var svgDoc = false;
 let currentRoot = "C"
+const numFifths = ['1','5','2','6','3','7','b5','b2','b6','b3','b7','4'];
 const circleOfFourths = ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'B', 'E', 'A', 'D', 'G'];
 const circleOfFifths =  ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
 let currentMajWheel = [...circleOfFifths];
@@ -22,7 +23,7 @@ console.log(currentMinWheel);
 console.log(currentDimWheel);
 
 
-var setMajRoot = function (root){
+function setMajRoot(root){
     root = "maj"+root;
     console.log("setMajRoot " + root);
     var index = majWheel.indexOf(root);
@@ -33,20 +34,56 @@ var setMajRoot = function (root){
     currentMinWheel.rotateRight(index);
     currentDimWheel.rotateRight(index);
     console.log(currentMajWheel);
+
+    assignNotes();
 }
 
-var setMinRoot = function (root){
+function setMinRoot(root){
     console.log("setMinRoot " + root);
+    root = "min"+root;
+    console.log("setMinRoot " + root);
+    var index = minWheel.indexOf(root);
+    var rootNote = currentMinWheel[index];
+    console.log("new root " + rootNote);
+    console.log(currentMinWheel);
+    currentMajWheel.rotateRight(index);
+    currentMinWheel.rotateRight(index);
+    currentDimWheel.rotateRight(index);
+    console.log(currentMinWheel);
+
+    assignNotes();
 
 }
 
-var setDimRoot = function (root){
+function setDimRoot(root){
     console.log("setDimRoot " + root);
+    root = "dim"+root;
+    console.log("setDimRoot " + root);
+    var index = dimWheel.indexOf(root);
+    var rootNote = currentDimWheel[index];
+    console.log("new root " + rootNote);
+    console.log(currentDimWheel);
+    currentMajWheel.rotateRight(index);
+    currentMinWheel.rotateRight(index);
+    currentDimWheel.rotateRight(index);
+    console.log(currentDimWheel);
 
+    assignNotes();
 }
 
 function setRoot(root){
+    console.log("setRoot " + root);
 
+}
+
+function setChord(root, value){
+    console.log("setChord  " + root + "  , " + value);
+    let index = numFifths.indexOf(root);
+    console.log(index);
+    console.log(currentMajWheel);
+    let note = currentMajWheel[index];
+    let chord = note+value;
+    console.log(chord);
 }
 
 function assignNotes(){
@@ -64,8 +101,18 @@ function assignNotes(){
         let dimNote = currentDimWheel[i];
         console.log(majNote);
         console.log(svgDoc.getElementById(majId).children[0]);
+        // if there are extra child elements, as tehre sometimes are coming from AI, delete them
+
+        while (svgDoc.getElementById(majId).childNodes.length > 1) {
+            svgDoc.getElementById(majId).removeChild(svgDoc.getElementById(majId).lastChild);
+        }
         svgDoc.getElementById(majId).children[0].textContent = majNote;
-        svgDoc.getElementById(minId).children[0].textContent = minNote;
+        // if there are extra child elements, as tehre sometimes are coming from AI, delete them
+        while (svgDoc.getElementById(minId).childNodes.length > 1) {
+            svgDoc.getElementById(minId).removeChild(svgDoc.getElementById(minId).lastChild);
+        }
+
+        svgDoc.getElementById(minId).children[0].textContent = minNote.toLowerCase();
 //        svgDoc.getElementById(dimId).children[0].textContent = dimNote;
     }
 }
