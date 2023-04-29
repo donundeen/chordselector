@@ -71,7 +71,7 @@
   <text onclick="setChord(&quot;1&quot;,&quot;7&quot;)" transform="translate(178.52 272.23)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">7</tspan></text>
   <text onclick="setChord(&quot;4&quot;,&quot;M7&quot;)" transform="translate(12.76 272.23)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">7</tspan></text>
   <text onclick="setChord(&quot;1&quot;,&quot;sus4&quot;)" transform="translate(178.52 323.81)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">4</tspan></text>
-  <text transform="translate(59.28 220.72)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">b</tspan></text>
+  <text onclick="setChord(&quot;2&quot;,&quot;blues&quot;)" transform="translate(59.28 220.72)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">b</tspan></text>
   <text onclick="setChord(&quot;4&quot;,&quot;M6&quot;)" transform="translate(5.08 323.81)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">6</tspan></text>
   <text onclick="setChord(&quot;3&quot;,&quot;dim7&quot;)" transform="translate(103.33 39.65)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">7</tspan></text>
   <polygon onclick="setChord(&quot;3&quot;,&quot;dim&quot;)" points="129.03 41.04 110.45 73.23 147.62 73.23 129.03 41.04" style="fill: #fff; stroke: #000; stroke-miterlimit: 10;"/>
@@ -84,7 +84,7 @@
   <text onclick="setChord(&quot;6&quot;,&quot;m6&quot;)" transform="translate(168.99 173.74)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">6</tspan></text>
   <text onclick="setChord(&quot;3&quot;,&quot;m6&quot;)" transform="translate(316.75 173.74)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">6</tspan></text>
   <text onclick="setChord(&quot;2&quot;,&quot;m6&quot;)" transform="translate(12.76 173.74)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">6</tspan></text>
-  <text transform="translate(215.72 220.71)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">b</tspan></text>
+  <text onclick="setChord(&quot;6&quot;,&quot;blues&quot;)" transform="translate(215.72 220.71)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">b</tspan></text>
   <text onclick="setChord(&quot;3&quot;,&quot;blues&quot;)" transform="translate(360.35 220.71)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">b</tspan></text>
   <text onclick="setChord(&quot;1&quot;,&quot;M9&quot;)" transform="translate(273.32 280.7)" style="font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">9</tspan></text>
   <text transform="translate(429.93 272.23)" style="fill: #fff; font-family: MyriadPro-Regular, &apos;Myriad Pro&apos;; font-size: 47.37px;"><tspan x="0" y="0">9</tspan></text>
